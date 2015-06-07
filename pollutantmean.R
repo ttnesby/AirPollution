@@ -19,14 +19,28 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
      # Build full filenames by combining directory, fileNo and extension
      fileNames <- paste(paste(directory, fileNo, sep ="/"), "csv", sep = ".")
      
-     # Iterate all files, calc mean for each file and summarize means
-     sumMeans <- 0
+     # Iterate all files, calc mean for each file and add to meansVector
+     meansVector <- vector(mode="numeric", length=0)
      
      for (aFileName in fileNames){
           fileMean <- mean((read.csv(aFileName)[, pollutant]), na.rm = TRUE)
-          sumMeans <- sumMeans + (if (is.nan(fileMean)) 0 else fileMean)
+          
+          # Add to meanVector iff contributing 
+          if (is.nan(fileMean)) 
+          {
+               next
+          }
+          
+          meansVector <- append(meansVector, fileMean)
      }
      
      # Return the mean of the pollutant across all given monitors
-     sumMeans/length(fileNames)
+     if (length(meansVector) > 0) 
+     {
+          mean(meansVector)
+     }
+     else 
+     {
+          NA
+     }
 }
