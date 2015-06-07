@@ -15,3 +15,6 @@ pollutantmean("specdata", pollutant = "sulfate")
 pollutantmean("specdata", pollutant = "nitrate")
 
 pollutantmean("specdata", "sulfate", 1:10)
+
+#source("submitscript1.R")
+#submit()
