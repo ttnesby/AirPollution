@@ -1,17 +1,17 @@
-# Directory hosting files
-dirFiles <- "~/Dropbox/Coursera/R Programming/Week2/PExercise/specdata"
-
 # Testing different cases
 
-pollutantmean(dirFiles, pollutant = "sulfate", id = 98:102)
-pollutantmean(dirFiles, pollutant = "nitrate", id = 98:102)
+source("pollutantmean.R")
 
-pollutantmean(dirFiles, pollutant = "sulfate", id = 47)
-pollutantmean(dirFiles, pollutant = "nitrate", id = 47)
+pollutantmean("specdata", pollutant = "sulfate", id = 98:102)
+pollutantmean("specdata", pollutant = "nitrate", id = 98:102)
 
-pollutantmean(dirFiles, pollutant = "sulfate", id = 291:294)
+pollutantmean("specdata", pollutant = "sulfate", id = 47)
+pollutantmean("specdata", pollutant = "nitrate", id = 47)
+
+pollutantmean("specdata", pollutant = "sulfate", id = 291:294)
 pollutantmean(dirFiles, pollutant = "nitrate", id = 291:294)
 
-pollutantmean(dirFiles, pollutant = "sulfate")
-pollutantmean(dirFiles, pollutant = "nitrate")
+pollutantmean("specdata", pollutant = "sulfate")
+pollutantmean("specdata", pollutant = "nitrate")
 
+pollutantmean("specdata", "sulfate", 1:10)

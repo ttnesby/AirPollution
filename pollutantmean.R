@@ -19,19 +19,22 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
      # Build full filenames by combining directory, fileNo and extension
      fileNames <- paste(paste(directory, fileNo, sep ="/"), "csv", sep = ".")
      
-     # Iterate all files, calc mean for each file and add to meansVector
+     # Iterate all files, add non-na data to meansVector
      meansVector <- vector(mode="numeric", length=0)
      
      for (aFileName in fileNames){
-          fileMean <- mean((read.csv(aFileName)[, pollutant]), na.rm = TRUE)
+          # Read csv file
+          fileData <- read.csv(aFileName)
+          # Extract non-na data for given pollutant
+          fileData <- fileData[!is.na(fileData[, pollutant]), pollutant]
           
           # Add to meanVector iff contributing 
-          if (is.nan(fileMean)) 
+          if (length(fileData) == 0) 
           {
                next
           }
           
-          meansVector <- append(meansVector, fileMean)
+          meansVector <- append(meansVector, fileData)
      }
      
      # Return the mean of the pollutant across all given monitors
