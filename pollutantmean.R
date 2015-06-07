@@ -23,9 +23,10 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
      sumMeans <- 0
      
      for (aFileName in fileNames){
-          sumMeans <- sumMeans + mean((read.csv(aFileName)[, pollutant]), na.rm = TRUE)
+          fileMean <- mean((read.csv(aFileName)[, pollutant]), na.rm = TRUE)
+          sumMeans <- sumMeans + (if (is.nan(fileMean)) 0 else fileMean)
      }
      
-     # Return the total mean of the pollutant across all given monitors
+     # Return the mean of the pollutant across all given monitors
      sumMeans/length(fileNames)
 }
